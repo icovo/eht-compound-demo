@@ -1,0 +1,18 @@
+{
+  "name": "eht-compound-demo",
+  "version": "1.0.0",
+  "description": "This is a demo to build a lending app with the Compound lending protocol.",
+  "main": "index.js",
+  "scripts": {
+    "approve-dai-main": "node --experimental-modules ./approveDaiMain.mjs",
+    "supply-dai-main": "node --experimental-modules ./supplyDaiMain.mjs",
+    "withdraw-dai-main": "node --experimental-modules ./withdrawDaiMain.mjs"
+  },
+  "keywords": [],
+  "author": "Tai",
+  "license": "ISC",
+  "dependencies": {
+    "ethereumjs-tx": "^1.3.7",
+    "web3": "^1.2.1"
+  }
+}
