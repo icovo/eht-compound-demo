@@ -4,9 +4,9 @@
   "description": "This is a demo to build a lending app with the Compound lending protocol.",
   "main": "index.js",
   "scripts": {
-    "approve-dai-main": "node --experimental-modules ./approveDaiMain.mjs",
-    "supply-dai-main": "node --experimental-modules ./supplyDaiMain.mjs",
-    "withdraw-dai-main": "node --experimental-modules ./withdrawDaiMain.mjs"
+    "approve-sai-main": "node --experimental-modules ./approveSaiMain.mjs",
+    "supply-sai-main": "node --experimental-modules ./supplySaiMain.mjs",
+    "withdraw-sai-main": "node --experimental-modules ./withdrawSaiMain.mjs"
   },
   "keywords": [],
   "author": "Tai",

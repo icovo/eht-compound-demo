@@ -1,6 +1,6 @@
 import Web3 from "web3";
 import EthTx from "ethereumjs-tx";
-import cDaiContract from './cDaiContract';
+import cSaiContract from './cSaiContract';
 
 // set up Web3 to use Infura as your web3 provider
 const web3 = new Web3(
@@ -13,17 +13,17 @@ const web3 = new Web3(
 const addressFrom = "[YOUR_ADDRESS]";
 const privKey = "[YOUR_PRIVATE_KEY]";
 
-// instantiate the cDai contract
-const cDaiContractInstance = new web3.eth.Contract(
-  JSON.parse(cDaiContract.cDaiContractAbi),
-  cDaiContract.cDaiContractAddress
+// instantiate the cSai contract
+const cSaiContractInstance = new web3.eth.Contract(
+  JSON.parse(cSaiContract.cSaiContractAbi),
+  cSaiContract.cSaiContractAddress
 );
 
-// declare a const variable to pass to the redeemUnderlying function of the cDai contract
+// declare a const variable to pass to the redeemUnderlying function of the cSai contract
 const REDEEM_AMOUNT =  web3.utils.toHex(1 * 10 ** 18);
 
 // create the encoded abi of the redeemUnderlying function
-const redeemUnderlyingEncodedABI = cDaiContractInstance.methods
+const redeemUnderlyingEncodedABI = cSaiContractInstance.methods
   .redeemUnderlying(REDEEM_AMOUNT)
   .encodeABI();
 
@@ -43,7 +43,7 @@ web3.eth.getTransactionCount(addressFrom).then(transactionNonce => {
     nonce: web3.utils.toHex(transactionNonce),
     gasLimit: web3.utils.toHex(400000),
     gasPrice: web3.utils.toHex(5000000000),
-    to: cDaiContract.cDaiContractAddress,
+    to: cSaiContract.cSaiContractAddress,
     from: addressFrom,
     data: redeemUnderlyingEncodedABI
   };

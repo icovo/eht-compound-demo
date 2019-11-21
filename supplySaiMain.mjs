@@ -1,7 +1,6 @@
 import Web3 from "web3";
 import EthTx from "ethereumjs-tx";
-import cDaiContract  from './cDaiContract';
-import daiTokenContract from './daiTokenContract';
+import cSaiContract from './cSaiContract';
 
 // set up Web3 to use Infura as your web3 provider
 const web3 = new Web3(
@@ -14,19 +13,18 @@ const web3 = new Web3(
 const addressFrom = "[YOUR_ADDRESS]";
 const privKey = "[YOUR_PRIVATE_KEY]";
 
-// instantiate the dai token contract
-const daiTokenContractInstance = new web3.eth.Contract(
-  JSON.parse(daiTokenContract.daiTokenContractAbi),
-  daiTokenContract.daiTokenContractAddress
+// instantiate the cSai contract
+const cSaiContractInstance = new web3.eth.Contract(
+  JSON.parse(cSaiContract.cSaiContractAbi),
+  cSaiContract.cSaiContractAddress
 );
 
-// declare const variables to pass to the approve function of the dai token contract
-const ADDRESS_SPENDER = cDaiContract.cDaiContractAddress;
-const TOKENS = web3.utils.toHex(-1);
+// declare a const variable to pass to the mint function of the cSai contract
+const MINT_AMOUNT = web3.utils.toHex(1 * 10 ** 18);
 
-// create the encoded abi of the approve function
-const approveEncodedABI = daiTokenContractInstance.methods
-  .approve(ADDRESS_SPENDER, TOKENS)
+// create the encoded abi of the mint function
+const mintEncodedABI = cSaiContractInstance.methods
+  .mint(MINT_AMOUNT)
   .encodeABI();
 
 // declare the function to sign a transaction object and send it to the Ethereum network.
@@ -43,11 +41,11 @@ web3.eth.getTransactionCount(addressFrom).then(transactionNonce => {
   const transactionObject = {
     chainId: 1,
     nonce: web3.utils.toHex(transactionNonce),
-    gasLimit: web3.utils.toHex(100000),
+    gasLimit: web3.utils.toHex(200000),
     gasPrice: web3.utils.toHex(5000000000),
-    to: daiTokenContract.daiTokenContractAddress,
+    to: cSaiContract.cSaiContractAddress,
     from: addressFrom,
-    data: approveEncodedABI
+    data: mintEncodedABI
   };
 
   sendSignedTx(transactionObject, function(error, result){
